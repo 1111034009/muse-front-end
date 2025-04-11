@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MB後台總覽</title>
+  <link rel="stylesheet" href="CSS/back.css">
+  <link rel="stylesheet" href="CSS/Backstage.css">
+  <link rel="stylesheet" href="CSS/easter-egg.css">
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const logo = document.getElementById('logo-text');
+      const links = document.querySelectorAll('.link-text');
+      const main = document.querySelector('.main');
+    
+      const isCollapsed = sidebar.classList.contains('collapsed');
+      sidebar.classList.toggle('collapsed');
+      main.classList.toggle('expanded');
+    
+      logo.textContent = isCollapsed ? 'Music Beats' : 'MB';
+    
+      if (!isCollapsed) {
+        logo.classList.add('animate');
+        setTimeout(() => logo.classList.remove('animate'), 400);
+      }
+    
+      links.forEach(link => {
+        link.style.display = isCollapsed ? 'inline' : 'none';
+      });
+    }
+
+    const eggQuotes = [
+      "♫ Music Beats♫",
+      "音樂，就是我給世界的情書💌",
+      "你現在的點擊值，讓我心跳加速",
+      "系統正常運作中...像你一樣完美✨",
+      "在這裡，只有你是主角。"
+    ];
+    let quoteIndex = 0;
+
+    document.addEventListener("DOMContentLoaded", () => {
+      // 動態載入 Back_side.html
+      fetch('Back_side.html')
+        .then(response => response.text())
+        .then(data => {
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(data, 'text/html');
+          const sidebar = doc.querySelector('#sidebar');
+          document.querySelector('.sidebar-toggle').insertAdjacentElement('afterend', sidebar);
+
+          // 初始化側邊欄狀態
+          const links = document.querySelectorAll('.link-text');
+          const main = document.querySelector('.main');
+          if (sidebar.classList.contains('collapsed')) {
+            links.forEach(link => link.style.display = 'none');
+            main.classList.add('expanded');
+          }
+
+          // 設定 Easter Egg
+          const logo = document.getElementById("logo-text");
+          const egg = document.createElement("div");
+          egg.className = "easter-egg";
+          egg.id = "easter-egg";
+          logo.insertAdjacentElement("afterend", egg);
+
+          logo.addEventListener("click", () => {
+            egg.classList.toggle("show");
+            if (egg.classList.contains("show")) {
+              egg.textContent = eggQuotes[quoteIndex];
+              quoteIndex = (quoteIndex + 1) % eggQuotes.length;
+            }
+          });
+        })
+        .catch(error => console.error('載入側邊欄失敗:', error));
+    });
+  </script>
+</head>
+
+<body>
+  <div class="sidebar-toggle" onclick="toggleSidebar()">☰</div>
+
+  <!-- 主內容區 -->
+  <div class="main">
+    <div class="search-bar">
+      <div class="search-container">
+        <input type="text" placeholder="搜尋" id="search-input" />
+        <button id="search-button" class="search-btn">
+          <img src="img/Search 02.png" alt="搜尋" />
+        </button>
+      </div>
+    </div>
+
+    <div class="dashboard-cards">
+      <div class="card">
+        <h3>歌曲數量</h3>
+        <p>1,204</p>
+      </div>
+      <div class="card">
+        <h3>用戶數</h3>
+        <p>1,204</p>
+      </div>
+    </div>
+
+    <div class="hot-section">
+      <h3>本月熱門</h3>
+      <div class="hot-tracks">
+        <div class="hot-track" onclick="location.href='#'">第一名歌曲</div>
+        <div class="hot-track" onclick="location.href='#'">第二名歌曲</div>
+        <div class="hot-track" onclick="location.href='#'">第三名歌曲</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
