@@ -9,7 +9,7 @@ function toggleSidebar() {
     sidebar.classList.toggle('collapsed');
     main.classList.toggle('expanded'); // 新增此行
 
-    logo.textContent = isCollapsed ? 'Music Beats' : 'MB';
+    logo.textContent = isCollapsed ? 'Muse' : 'MS';
 
     if (!isCollapsed) {
       logo.classList.add('animate');
@@ -22,8 +22,8 @@ function toggleSidebar() {
 
     // 推擠主頁面
     if (isCollapsed) {
-      main.style.marginLeft = '200px'; // 展開側邊欄時，主頁面推擠
-      headers.style.marginLeft = '200px'; 
+      main.style.marginLeft = '150px'; // 展開側邊欄時，主頁面推擠
+      headers.style.marginLeft = '15px'; 
     } else {
       main.style.marginLeft = '60px'; // 收起側邊欄時，主頁面恢復
       head.style.marginLeft = '60px'; // 展開側邊欄時，主頁面推擠
@@ -35,7 +35,7 @@ function toggleSidebar() {
     // 定義側邊欄的 HTML
     const sidebarHTML = `
       <div class="sidebar collapsed" id="sidebar">
-        <h2 id="logo-text">MB</h2>
+        <h2 id="logo-text">MS</h2>
         <a href="Backstage_js.html"><span><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
           <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5"/>
         </svg></span><span class="link-text">主頁</span></a>
