@@ -23,10 +23,9 @@ function toggleSidebar() {
     // 推擠主頁面
     if (isCollapsed) {
       main.style.marginLeft = '150px'; // 展開側邊欄時，主頁面推擠
-      headers.style.marginLeft = '15px'; 
     } else {
       main.style.marginLeft = '60px'; // 收起側邊欄時，主頁面恢復
-      head.style.marginLeft = '60px'; // 展開側邊欄時，主頁面推擠
+
 
     }
   }
